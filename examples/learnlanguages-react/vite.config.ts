@@ -12,22 +12,23 @@ const pwaOptions: Partial<VitePWAOptions> = {
   base: '/',
   includeAssets: ['favicon.png'],
   manifest: {
-    name: 'Offline timer',
-    short_name: 'Offline timer',
+    name: 'Learning languages by subtitles',
+    short_name: 'Learn by Subs',
+    description: 'Learning languages by subtitles',
     theme_color: '#ffffff',
     icons: [
       {
-        src: 'alarm-192.png', // <== don't add slash, for testing
+        src: 'icon-192.png', // <== don't add slash, for testing
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/alarm-512.png', // <== don't remove slash, for testing
+        src: '/icon-512.png', // <== don't remove slash, for testing
         sizes: '512x512',
         type: 'image/png',
       },
       {
-        src: 'alarm-512.png', // <== don't add slash, for testing
+        src: 'icon-512.png', // <== don't add slash, for testing
         sizes: '512x512',
         type: 'image/png',
         purpose: 'any maskable',
