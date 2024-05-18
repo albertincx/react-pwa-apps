@@ -1,0 +1,32 @@
+241
+00:11:37,739 --> 00:11:39,782
+What is this file size?
+
+242
+00:11:40,367 --> 00:11:42,451
+1 .2 megabytes? No way.
+
+243
+00:11:43,620 --> 00:11:46,413
+Wow, that doesn't sound at all downgraded.
+
+244
+00:11:48,708 --> 00:11:50,376
+The file size is like, half.
+
+245
+00:11:50,752 --> 00:11:52,836
+And look how fast this search is.
+
+246
+00:11:54,714 --> 00:11:57,925
+Holy shit, how did it
+find a match that fast?
+
+247
+00:11:59,010 --> 00:12:02,096
+It's like it's searching compressed files?
+
+248
+00:12:03,139 --> 00:12:04,765
+No way.

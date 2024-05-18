@@ -1,0 +1,14 @@
+[
+  {
+    "bstr": "62\n00:03:37,666 --> 00:03:39,750\nTienes razón. ¿Cuándo maduraré?\n\n63\n00:03:39,833 --> 00:03:42,875\n¿Cuándo dejaré\r\nde desaprovechar oportunidades,\n\n64\n00:03:43,125 --> 00:03:45,250\nlas cuales me pones a la fuerza,\n\n65\n00:03:45,333 --> 00:03:46,625\ny me convertiré en hombre?\n\n66\n00:03:46,708 --> 00:03:50,500\nCreo que de verdad debo reconsiderar\r\nmis prioridades.\n\n67\n00:03:50,583 --> 00:03:52,458\nBien envuelto en sábanas de seda\n\n68\n00:03:52,541 --> 00:03:55,083\ncon caviar y jerez,\r\nsigues comprando la misma marca, ¿no?\n\n69\n00:03:55,166 --> 00:03:57,666\n¿Crees que permitiré\r\nque fracases a propósito\n\n70\n00:03:57,750 --> 00:03:59,708\ny vuelvas como si nada\n\n71\n00:03:59,791 --> 00:04:02,583\na tu vida de privilegios,\r\ndesprovista de propósito y sentido?\n\n72\n00:04:02,750 --> 00:04:05,416\nSí. ¿Adónde...?\n\n73\n00:04:05,500 --> 00:04:09,291\nFelicitaciones. Ahora eres cartero.",
+    "filename": "demoSPA.srt",
+    "lang": "spa",
+    "sep": "/\\n[0-9]{1,6}\\n/"
+  },
+  {
+    "bstr": "1\n00:03:37,458 --> 00:03:39,750\nYou're right. When will I grow up?\n[^^]00:03:39,833 --> 00:03:43,041\nWhen will I stop squandering\r\nall these opportunities,\n[^^]00:03:43,125 --> 00:03:45,250\nwhich you so kindly forced me into,\n[^^]00:03:45,333 --> 00:03:46,625\nand become my own man?\n[^^]00:03:46,708 --> 00:03:50,500\nI guess I must really hanker down\r\nand rethink my priorities.\n[^^]00:03:50,583 --> 00:03:53,791\nAll wrapped up in my silk sheets\r\nwith some caviar and a sherry...\n[^^]00:03:53,875 --> 00:03:55,083\nYou still buy the same brand, right?\n[^^]00:03:55,166 --> 00:03:57,666\nYou think I'm just going to\r\nwatch you purposely fail\n[^^]00:03:57,750 --> 00:03:59,708\nand then let you waltz right back\n[^^]00:03:59,791 --> 00:04:02,583\nto a privileged life\r\nvoid of any purpose or meaning?\n[^^]00:04:02,666 --> 00:04:05,416\nWell, yeah. Where else would I--\n[^^]00:04:05,500 --> 00:04:09,291\nCongratulations. You are now a postman.",
+    "filename": "demoENG.srt",
+    "sep": "[^^]",
+    "lang": "eng"
+  }
+]
