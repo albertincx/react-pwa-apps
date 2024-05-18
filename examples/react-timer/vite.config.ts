@@ -1,11 +1,12 @@
 import process from 'node:process'
 import fs from 'fs/promises'
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
-import legacy from '@vitejs/plugin-legacy';
+import legacy from '@vitejs/plugin-legacy'
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',

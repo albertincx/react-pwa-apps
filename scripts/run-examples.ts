@@ -1,11 +1,7 @@
 import { execSync } from 'node:child_process'
-import prompts from 'prompts'
 import {
   blue,
-  cyan,
   green,
-  red,
-  reset,
 } from 'kolorist'
 
 type Color = (str: string | number) => string
@@ -54,14 +50,6 @@ const STRATEGIES: Strategy[] = [
   },
 ]
 
-const FRAMEWORKS: Framework[] = [
-  {
-    name: 'react',
-    color: cyan,
-    dir: 'react-router',
-  },
-]
-
 interface PromptResult {
   framework: Framework
   strategy: Strategy
@@ -72,8 +60,7 @@ interface PromptResult {
 
 async function init() {
   try {
-    // const { framework, strategy, behavior, reloadSW, selfDestroying }: PromptResult = {};
-    const framework = FRAMEWORKS[0];
+    const framework = { dir: process.argv[2] };
     const strategy = STRATEGIES[0];
     const behavior = BEHAVIORS[0];
     const reloadSW = false;
