@@ -9,7 +9,7 @@ export function resolvePWAAssetsOptions(
   const {
     disabled,
     preset = 'minimal-2023',
-    image = 'public/favicon.svg',
+    image = 'public/favicon.png',
     htmlPreset = '2023',
     overrideManifestIcons = false,
     includeHtmlHeadLinks = true,

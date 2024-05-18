@@ -165,7 +165,7 @@ export interface PWAAssetsOptions {
    *
    * If the `config` option is enabled, this option will be ignored.
    *
-   * @default `public/favicon.svg`
+   * @default `public/favicon.png`
    */
   image?: string
   /**

@@ -1,31 +1,33 @@
 import process from 'node:process'
+import fs from 'fs/promises'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
+import legacy from '@vitejs/plugin-legacy';
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
   base: '/',
-  includeAssets: ['favicon.svg'],
+  includeAssets: ['favicon.png'],
   manifest: {
-    name: 'PWA Router',
-    short_name: 'PWA Router',
+    name: 'Offline timer',
+    short_name: 'Offline timer',
     theme_color: '#ffffff',
     icons: [
       {
-        src: 'pwa-192x192.png', // <== don't add slash, for testing
+        src: 'alarm-192.png', // <== don't add slash, for testing
         sizes: '192x192',
         type: 'image/png',
       },
       {
-        src: '/pwa-512x512.png', // <== don't remove slash, for testing
+        src: '/alarm-512.png', // <== don't remove slash, for testing
         sizes: '512x512',
         type: 'image/png',
       },
       {
-        src: 'pwa-512x512.png', // <== don't add slash, for testing
+        src: 'alarm-512.png', // <== don't add slash, for testing
         sizes: '512x512',
         type: 'image/png',
         purpose: 'any maskable',
@@ -70,12 +72,35 @@ if (selfDestroying)
 
 export default defineConfig({
   // base: process.env.BASE_URL || 'https://github.com/',
+  define: {
+    __BUILD__: `"${new Date().toISOString()}"`,
+  },
   build: {
     sourcemap: process.env.SOURCE_MAP === 'true',
   },
   plugins: [
     react(),
+    legacy({
+      /**
+       * 1. try changing these values
+       * 2. run `pnpm build`, see the output files in dist directory
+       * 3. run `pnpm preview`, see the actual loaded files in different versions of browsers
+       */
+      targets: ['ie >= 11'],
+      renderLegacyChunks: true,
+      modernPolyfills: true,
+    }),
     VitePWA(pwaOptions),
     replace(replaceOptions),
+    {
+      name: 'my-plugin-for-index-html-build-replacement',
+      transformIndexHtml: {
+        enforce: 'pre', // Tells Vite to run this before other processes
+        async transform() {
+          // Do some logic; whatever you want
+          return await fs.readFile('./index-build.html', 'utf8')
+        },
+      },
+    },
   ],
 })
