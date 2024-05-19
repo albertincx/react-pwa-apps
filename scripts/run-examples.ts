@@ -39,14 +39,14 @@ const BEHAVIORS: Behavior[] = [
 
 const STRATEGIES: Strategy[] = [
   {
-    name: 'generateSW',
-    display: 'generateSW',
-    color: green,
-  },
-  {
     name: 'injectManifest',
     display: 'injectManifest',
     color: blue,
+  },
+  {
+    name: 'generateSW',
+    display: 'generateSW',
+    color: green,
   },
 ]
 

@@ -251,7 +251,7 @@ function updateTimer(data) {
 /**The Reminder object contains the sound, the amount of time passed in hours and minutes, the interval
  * at which the reminder should be triggered and then the functionality to set the reminder interval.*/
 function Reminder() {
-    this.sound = new Audio("src/alarm-clock-short.mp3");
+    this.sound = new Audio("alarm-clock-short.mp3");
     this.stopSound = () => {
         this.sound.pause();
         this.sound.currentTime = 0;

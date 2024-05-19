@@ -1,5 +1,5 @@
 import process from 'node:process'
-import fs from 'fs/promises'
+import fs from 'node:fs/promises'
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
@@ -41,8 +41,35 @@ const pwaOptions: Partial<VitePWAOptions> = {
     type: 'module',
     navigateFallback: 'index.html',
   },
+  // workbox: {
+  //   runtimeCaching: [{
+  //     handler: 'NetworkOnly',
+  //     urlPattern: /\/*.mp3/,
+  //     method: 'GET',
+  //     options: {
+  //       backgroundSync: {
+  //         name: 'myQueueName',
+  //         options: {
+  //           maxRetentionTime: 1,
+  //         },
+  //       },
+  //     },
+  //   }],
+  // },
 }
-
+////BackgroundSync
+// //On https://ptsv2.com/t/n5y9f-1556037444 you can check for received posts
+// const bgSyncPlugin = new workbox.backgroundSync.Plugin('queue', {
+//     maxRetentionTime: 24 * 60 // Retry for max of 24 Hours
+// });
+//
+// workbox.routing.registerRoute(
+//     'https://ptsv2.com/t/n5y9f-1556037444/post',
+//     new workbox.strategies.NetworkOnly({
+//         plugins: [bgSyncPlugin]
+//     }),
+//     'POST'
+// );
 const replaceOptions = { __DATE__: new Date().toISOString() }
 const claims = process.env.CLAIMS === 'true'
 const reload = process.env.RELOAD_SW === 'true'
@@ -52,8 +79,8 @@ if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
   pwaOptions.filename = claims ? 'claims-sw.ts' : 'prompt-sw.ts'
   pwaOptions.strategies = 'injectManifest'
-  ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
-  ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
+  ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'Offline Timer'
+  ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'Offline Timer'
   pwaOptions.injectManifest = {
     minify: false,
     enableWorkboxModulesLogs: true,
@@ -96,9 +123,8 @@ export default defineConfig({
     {
       name: 'my-plugin-for-index-html-build-replacement',
       transformIndexHtml: {
-        enforce: 'pre', // Tells Vite to run this before other processes
-        async transform() {
-          // Do some logic; whatever you want
+        order: 'pre',
+        async handler() {
           return await fs.readFile('./index-build.html', 'utf8')
         },
       },

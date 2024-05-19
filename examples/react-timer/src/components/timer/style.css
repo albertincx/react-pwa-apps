@@ -216,7 +216,7 @@ label {
 }
 
 .times > a {
-    background-image: url("favicon.png");
+    background-image: url("/favicon.png");
     background-repeat: no-repeat;
     background-color: #fff;
     background-position: 8px 50%;

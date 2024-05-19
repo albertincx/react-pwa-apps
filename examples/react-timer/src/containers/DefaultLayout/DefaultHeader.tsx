@@ -2,17 +2,21 @@ import React, {SyntheticEvent} from 'react';
 
 const DefaultHeader = () => {
     const [showPopup, setPopup] = React.useState(false)
-    const togglePopup = (e: SyntheticEvent, show = true) => {
+    const togglePopup = (e: SyntheticEvent) => {
         e.preventDefault();
-        setPopup(show);
+        setPopup(false);
     };
+    const show = (e: SyntheticEvent) => {
+        e.preventDefault();
+        setPopup(true);
+    }
     const d = new Date(__BUILD__);
 
     return (
         <>
             <div className="navbar">
                 <div className="wrapper">
-                    <a href="" onClick={togglePopup}>
+                    <a href="" onClick={show}>
                         About
                     </a>
                 </div>
@@ -24,7 +28,7 @@ const DefaultHeader = () => {
                             href=""
                             title="Close"
                             className="modal-close"
-                            onClick={e => togglePopup(e, false)}
+                            onClick={togglePopup}
                         >
                             Close
                         </a>
@@ -33,8 +37,8 @@ const DefaultHeader = () => {
                             <div>This is an offline timer</div>
                             <div>Code is open
                                 <div>
-                                    <a href="https://github.com/albertincx/timer-react">
-                                        https://github.com/albertincx/timer-react
+                                    <a href="https://github.com/albertincx/react-pwa-apps">
+                                        https://github.com/albertincx/react-pwa-apps
                                     </a>
                                 </div>
                             </div>
@@ -47,13 +51,13 @@ const DefaultHeader = () => {
                                 </a>
                             </p>
                             <p>
-                                <small>Last update time: {`${d.toDateString()} ${d.toLocaleTimeString()}`}</small>
+                                <small>Update time: {`${d.toDateString()} ${d.toLocaleTimeString()}`}</small>
                             </p>
                             <a
                                 href=""
                                 title="Close"
                                 className="modal-close bottom"
-                                onClick={e => togglePopup(e, false)}
+                                onClick={togglePopup}
                             >
                                 Close
                             </a>

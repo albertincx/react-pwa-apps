@@ -261,8 +261,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(terser@5.31.0)(vite@5.2.11)
       mobile-select:
-        specifier: ^1.4.0
-        version: 1.4.0
+        specifier: ^1.3.3
+        version: 1.3.3
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -7086,6 +7086,10 @@ packages:
       pkg-types: 1.1.1
       ufo: 1.5.3
     dev: true
+
+  /mobile-select@1.3.3:
+    resolution: {integrity: sha512-DnDRwJZma/DAJ8reLHHHjLe0fI9BFIoX+Vlr0CwqfuLX7jcI1CY8LNz6s9a9KGojBm+hxbO/zJKXOR+iu1W2pw==}
+    dev: false
 
   /mobile-select@1.4.0:
     resolution: {integrity: sha512-6Gq3+RDCrDbBr4+y48JfrRpLtoS8Bj7EcGv/YEXPq6d09wZ8lKaQzXRF/P8hpFUXA/uFMmATemZbqZFI6WeFQg==}

@@ -60,7 +60,7 @@ const MyApp = () => {
         }
         setCountDown(0);
         document.title = TIMER_TITLE
-        window.history.pushState(null, document.title, '/');
+        window.history.replaceState(null, document.title, '/');
         if (cb instanceof Function) cb();
     }
 
@@ -101,7 +101,7 @@ const MyApp = () => {
 
         if (tm) {
             reset(() => {
-                window.history.pushState('time', '', '#timer=' + tm);
+                window.history.replaceState(null, '', '#timer=' + tm);
                 document.title = `${TIMER_TITLE}${tm}`
                 setCountDown(+tm + getRandomMs());
                 // @ts-ignore
