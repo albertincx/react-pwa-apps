@@ -29,7 +29,7 @@ self.addEventListener('notificationclick', event => {
       clients
           .matchAll({
             type: "window",
-            includeUncontrolled: true
+            includeUncontrolled: true,
           })
           .then((clientList) => {
             console.log('Data', clientList);

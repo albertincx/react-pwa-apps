@@ -1,5 +1,3 @@
-export const APP_SETTINGS = 'app_settings';
-
 export const SCROLL_VAR = 'app_scroll';
 export const POPUP_DISCUSS = 'POPUP_DISCUSS';
 export const POPUP_SETTINGS = 'POPUP_SETTINGS';

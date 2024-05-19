@@ -1,15 +1,15 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useState} from 'react';
 import {CascadeData} from 'mobile-select';
 
 import Storage from '../../utils/storage';
 
 import MSComponent from './components/Ms';
 
-import {APP_SETTINGS, POPUP_DISCUSS, POPUP_SETTINGS, SCROLL_VAR, TIMER_TITLE} from './consts';
+import {POPUP_DISCUSS, POPUP_SETTINGS, SCROLL_VAR, TIMER_TITLE} from './consts';
 
-import {getRandomMs, getSettings, getTimeStr} from './utils';
+import {getRandomMs, getTimeStr} from './utils';
 
-import {ISettings, IState} from './types';
+import {IState} from './types';
 
 import './style.css';
 
@@ -21,7 +21,7 @@ const h = new Date().getHours();
 const m = new Date().getMinutes();
 
 Array.from({length: 59}).map((_, idx) => {
-    let min: string | number = getTimeStr(idx + 1);
+    const min: string | number = getTimeStr(idx + 1);
     minDemoData.push({id: `${idx + 1}`, value: `${min}`})
 })
 
@@ -41,7 +41,6 @@ const url: string[] = location.href.split('timer=');
 if (url[1]) {
     countD = +url[1];
     document.title = `${TIMER_TITLE}${countD}`
-    // @ts-ignore
     window.safTimerBtn(+countD);
 }
 
@@ -51,16 +50,11 @@ const MyApp = () => {
     const [countDown, setCountDown] = useState(countD);
     const [curDemoData] = useState(initDemoData);
 
-    const reset = (cb?: () => void | number) => {
-        if (typeof cb === "number") {
-            if (cb === 1) {
-                setCountDown(0);
-            }
-            return;
-        }
+    const reset = (cb?: () => void) => {
         setCountDown(0);
         document.title = TIMER_TITLE
         window.history.replaceState(null, document.title, '/');
+
         if (cb instanceof Function) cb();
     }
 
@@ -83,7 +77,6 @@ const MyApp = () => {
                 if (diffInSec) {
                     reset(() => {
                         setCountDown(diffInSec);
-                        // @ts-ignore
                         window.safTimerBtn(+diffInSec);
                     });
                 }
@@ -98,13 +91,12 @@ const MyApp = () => {
             return;
         }
         const tm = e.target.dataset.time;
-
+        console.log(tm);
         if (tm) {
             reset(() => {
                 window.history.replaceState(null, '', '#timer=' + tm);
                 document.title = `${TIMER_TITLE}${tm}`
                 setCountDown(+tm + getRandomMs());
-                // @ts-ignore
                 window.safTimerBtn(+tm + getRandomMs());
             })
         }
@@ -113,7 +105,6 @@ const MyApp = () => {
     }
 
     const handleReset = (_: React.SyntheticEvent<EventTarget>) => {
-        // @ts-ignore
         window.safTimerResetBtn()
         reset();
     }
@@ -132,6 +123,7 @@ const MyApp = () => {
                 <a className="btn" href="/#timer=3600" onClick={setTimer} data-time="3600">1 hour</a>
                 <a className="btn" href="/#timer=4800" onClick={setTimer} data-time="4800">1 h 20 min</a>
                 <a className="btn" href="/#timer=5400" onClick={setTimer} data-time="5400">1 h 30 min</a>
+                {/*<a className="btn" href="/" onClick={setTimer} data-time="">+</a>*/}
             </div>
             <br/>
             <MSComponent config={config}/>
@@ -193,19 +185,6 @@ class Index extends Component<Props, IState> {
     voiceSetting = (e: React.SyntheticEvent) => {
         e && e.preventDefault();
         this.setState({modal: POPUP_SETTINGS});
-    };
-
-    voiceSettingSave = (newSettings: ISettings, force = false) => {
-        const {} = newSettings;
-        if (force) {
-            //
-        } else {
-            return this.closeModal();
-        }
-        const oldSettings = getSettings() || {};
-        // @ts-ignore
-        Storage.setJ(APP_SETTINGS, {...oldSettings});
-        this.setState({modal: ''});
     };
 
 

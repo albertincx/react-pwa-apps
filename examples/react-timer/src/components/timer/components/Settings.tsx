@@ -7,22 +7,8 @@ type IProps = {
     voiceSettingSave: (s: ISettings, b?: boolean) => void;
 }
 
-const Settings: React.FC<IProps> = ({data, togglePopup, voiceSettingSave}) => {
-    const [state, setState] = useState({});
-
-    const voiceSettings = (e: SyntheticEvent<EventTarget>) => {
-        // If event target not an HTMLButtonElement, exit
-        if (!(e.target instanceof HTMLLinkElement)) {
-            return;
-        }
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const {name, value} = e.target;
-        setState((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+const Settings: React.FC<IProps> = ({togglePopup, voiceSettingSave}) => {
+    const [state] = useState({});
 
     const settingSave = (e: SyntheticEvent) => {
         voiceSettingSave(state);

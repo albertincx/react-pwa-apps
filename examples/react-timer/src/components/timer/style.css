@@ -114,15 +114,6 @@ button.del-icon {
     display: block;
 }
 
-.folder-header {
-    position: relative;
-    cursor: pointer;
-}
-
-.folder-header:hover {
-    background-color: #ccc;
-}
-
 .folder > ul {
     padding-left: 1em;
     margin: 0;
@@ -175,12 +166,6 @@ label {
     width: 77px;
 }
 
-
-.App1 {
-    font-family: sans-serif;
-    text-align: center;
-}
-
 .App {
     display: flex;
     justify-content: space-around;
@@ -206,7 +191,6 @@ label {
 }
 
 .my-trigger-style {
-    /*color: skyblue;*/
     font-weight: bold;
 }
 
@@ -285,10 +269,6 @@ label {
     100% {
         background-color: #333;
     }
-}
-
-.countdown {
-    animation: countdown 1s infinite;
 }
 
 @media (max-height: 500px) {

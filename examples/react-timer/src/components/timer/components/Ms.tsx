@@ -7,6 +7,7 @@ type MSProps = {
     placeholder?: string;
     children?: JSX.Element;
 };
+
 export default function MsComponent(props: MSProps) {
     const triggerRef = useRef(null);
     const instanceRef = useRef<React.RefObject<null>>(null);
@@ -21,7 +22,7 @@ export default function MsComponent(props: MSProps) {
                 triggerDisplayValue: !props.children,
             });
         }
-
+        // console.log('RENDER EFFECT')
         return () => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore

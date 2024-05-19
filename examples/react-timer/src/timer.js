@@ -215,12 +215,12 @@ function updateTimer(data) {
                 notificationOne = new Notification("Times up!",
                     {
                         icon: "icon-144x144.png",
-                        silent: true
+                        silent: true,
                     });
                 notificationOne.onclose = () => {
                     reminderData.stopSound();
                 }
-                notificationOne.onclick = (e) => {
+                notificationOne.onclick = () => {
                     notificationOne.close();
                 }
             } catch (e) {
@@ -230,7 +230,6 @@ function updateTimer(data) {
                         data: {
                             cnt: timer.countDown,
                         },
-                        action: ['test'],
                         actions: [
                             {
                                 action: 'coffee-action',
@@ -331,7 +330,7 @@ let web_worker;
 function startBackgroundProcess() {
     if (typeof (Worker) !== "undefined") {
         if (typeof (web_worker) == "undefined") {
-            web_worker = new Worker("timer-proccess.js");
+            web_worker = new Worker("timer-process.js");
         }
         web_worker.onmessage = function (event) {
             updateTimer(event.data);
@@ -371,7 +370,7 @@ function init() {
             "update_from_storage",
             parseInt(hh),
             parseInt(mm),
-            parseInt(ss)
+            parseInt(ss),
         ]);
     }
 
