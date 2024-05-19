@@ -1,8 +1,11 @@
 pnpm run examples $1
 
-DD=$(grep -v '^#' .env | grep -e "DIR" | sed -e 's/.*=//')
+DD=
 if [ "$2" != "" ]; then
   DD=$2
+fi
+if [ "$3" != "" ]; then
+  exit
 fi
 if [ "$DD" != "" ]; then
   echo $DD

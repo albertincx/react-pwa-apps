@@ -1,11 +1,23 @@
 import React, {SyntheticEvent} from 'react';
 
+const crzyInit = location.hostname === 'localhost' ? 1 : 1000
+
 const DefaultHeader = () => {
     const [showPopup, setPopup] = React.useState(false)
+    const [crzy, setCrzy] = React.useState(crzyInit);
+
     const togglePopup = (e: SyntheticEvent) => {
         e.preventDefault();
         setPopup(false);
     };
+
+    const handleCrzy = (e: SyntheticEvent) => {
+        e.preventDefault();
+        const newCrzy = crzy === 1 ? 1000 : 1;
+        window.chgStepTimer(newCrzy);
+        setCrzy(newCrzy);
+    };
+
     const show = (e: SyntheticEvent) => {
         e.preventDefault();
         setPopup(true);
@@ -52,6 +64,13 @@ const DefaultHeader = () => {
                             </p>
                             <p>
                                 <small>Update time: {`${d.toDateString()} ${d.toLocaleTimeString()}`}</small>
+                            </p>
+                            <p>
+                                {!!location.hostname.match('localhost') && (
+                                    <button type="button" onClick={handleCrzy}>
+                                        Crazy timer is {`${crzy === 1 ? 'On' : 'Off'}`}
+                                    </button>
+                                )}
                             </p>
                             <a
                                 href=""

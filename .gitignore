@@ -11,4 +11,3 @@ examples/*/test-results/
 examples/*/playwright-report/
 examples/*/playwright/.cache/
 tmp/
-.env

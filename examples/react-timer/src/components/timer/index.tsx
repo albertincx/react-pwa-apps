@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {CascadeData} from 'mobile-select';
 
 import Storage from '../../utils/storage';
@@ -50,6 +50,14 @@ const MyApp = () => {
     const [countDown, setCountDown] = useState(countD);
     const [curDemoData] = useState(initDemoData);
 
+    useEffect(() => {
+        if (!window.resetReactApp) {
+            window.resetReactApp = () => {
+                setCountDown(0)
+            };
+        }
+    }, []);
+
     const reset = (cb?: () => void) => {
         setCountDown(0);
         document.title = TIMER_TITLE
@@ -91,13 +99,12 @@ const MyApp = () => {
             return;
         }
         const tm = e.target.dataset.time;
-        console.log(tm);
         if (tm) {
             reset(() => {
                 window.history.replaceState(null, '', '#timer=' + tm);
                 document.title = `${TIMER_TITLE}${tm}`
                 setCountDown(+tm + getRandomMs());
-                window.safTimerBtn(+tm + getRandomMs());
+                window.safTimerBtn(+tm);
             })
         }
 

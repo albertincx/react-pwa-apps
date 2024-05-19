@@ -30,8 +30,8 @@ function ReloadPrompt() {
         console.log('SW Registered: ' + r)
       }
     },
-    onRegisterError(error) {
-      console.log('SW registration error', error)
+    onRegisterError(e) {
+      console.log('SW registration error', e)
     },
   })
 
