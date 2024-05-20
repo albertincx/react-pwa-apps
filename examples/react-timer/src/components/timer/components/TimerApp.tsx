@@ -6,6 +6,8 @@ import 'grudus-timepicker/dist/index.css'
 import {TIMER_TITLE} from '../consts';
 import {getRandomMs} from '../utils';
 
+import {StorageManager} from "../../../utils/storage.ts";
+
 let countD: number = 0;
 
 const url: string[] = location.href.split('timer=');
@@ -30,8 +32,36 @@ const timerOpts = {
     handColor: "#F44336",
 }
 
-const TimerApp = () => {
+interface ITimer {
+    time?: number;
+    name: string;
+}
+
+const initTimers: ITimer[] = [
+    {name: '3 sec', time: 3},
+    {name: '1 min', time: 60},
+    {name: '5 min', time: 300},
+    {name: '10 min', time: 600},
+    {name: '20 min', time: 1200},
+    {name: '30 min', time: 1800},
+    {name: '1 hour', time: 3600},
+    {name: '1 h 20 min', time: 4800},
+    {name: '1 h 30 min', time: 5400},
+];
+
+const getInitTimers = () => {
+    const sT = StorageManager.getJ('timers') || [];
+
+    return sT.length ? sT : initTimers;
+}
+
+interface IProps {
+    edit: boolean;
+}
+
+const TimerApp: React.FC<IProps> = ({edit}) => {
     const [countDown, setCountDown] = useState(countD);
+    const [timers, setTimers] = useState<ITimer[]>(getInitTimers());
 
     useEffect(() => {
         if (!window.resetReactApp) {
@@ -49,11 +79,32 @@ const TimerApp = () => {
         if (cb instanceof Function) cb();
     }
 
+    const reBuildTimers = (addOrDeleteIndex: string | { name: '' } = '', cb?: () => void) => {
+        let newTimers = [...timers];
+        if (typeof addOrDeleteIndex !== 'string') {
+            if (~newTimers.findIndex((t) => t.name === addOrDeleteIndex.name)) {
+                // has timer do nothing
+                return;
+            }
+            newTimers.push(addOrDeleteIndex);
+        } else {
+            newTimers = timers.filter(({time}) => `${time}` !== addOrDeleteIndex);
+        }
+        StorageManager.setJ('timers', newTimers);
+        setTimers(newTimers);
+        if (cb instanceof Function) cb();
+    };
+
     const setTimer = (e: React.SyntheticEvent<EventTarget>) => {
         e.stopPropagation();
         e.preventDefault();
         if (!(e.target instanceof HTMLElement)) return;
 
+        const toDelete = e.target.dataset.todelete;
+        if (toDelete) {
+            reBuildTimers(toDelete);
+            return;
+        }
         const tm = e.target.dataset.time;
         if (tm) {
             reset(() => {
@@ -62,13 +113,13 @@ const TimerApp = () => {
                 window.safTimerBtn(+tm);
             })
         } else {
-            const current = e.target.dataset.current;
+            const countdown = e.target.dataset.countdown;
             Timepicker.showPicker({
-                time: current ? new Date() : {hours: 0, minutes: 5},
+                time: countdown ? new Date() : {hours: 0, minutes: 5},
                 ...timerOpts,
                 onSubmit: ({hours, minutes}) => {
                     let diffSeconds = 0;
-                    if (!current) {
+                    if (!countdown) {
                         if (hours) {
                             diffSeconds = hours * 60 * 60;
                         }
@@ -84,10 +135,16 @@ const TimerApp = () => {
                         diffSeconds = tm / 1000;
                     }
                     if (diffSeconds) {
-                        reset(() => {
-                            setCountDown(diffSeconds);
-                            window.safTimerBtn(+diffSeconds);
-                        });
+                        const newTime = {
+                            time: diffSeconds,
+                            name: `${hours ? `${hours} h ` : ''}${minutes} min`,
+                        }
+                        reBuildTimers(newTime, countdown && (() => {
+                            reset(() => {
+                                setCountDown(diffSeconds);
+                                window.safTimerBtn(+diffSeconds);
+                            });
+                        }));
                     }
                 },
             });
@@ -101,24 +158,25 @@ const TimerApp = () => {
         reset();
     }
 
+    const renderTimes = () => {
+        return timers.map(({time, name}) => (
+            <a key={`${time}${name}`} className="btn" href={`/#timer=${time}`} onClick={setTimer} data-time={time}>
+                {name}
+                <div className="edit" data-todelete={edit && time}>{edit ? (
+                    <div className="icon-delete" data-todelete={time} />
+                ) : ''}</div>
+            </a>
+        ))
+    }
+
     return (
         <>
-            <div className="grid times">
-                <a className="btn" href="/#timer=3" onClick={setTimer} data-time="3">3 sec</a>
-                <a className="btn" href="/#timer=30" onClick={setTimer} data-time="30">30 sec</a>
-                <a className="btn" href="/#timer=60" onClick={setTimer} data-time="60">1 min</a>
-                <a className="btn" href="/#timer=120" onClick={setTimer} data-time="120">2 min</a>
-                <a className="btn" href="/#timer=300" onClick={setTimer} data-time="300">5 min</a>
-                <a className="btn" href="/#timer=600" onClick={setTimer} data-time="600">10 min</a>
-                <a className="btn" href="/#timer=1200" onClick={setTimer} data-time="1200">20 min</a>
-                <a className="btn" href="/#timer=1800" onClick={setTimer} data-time="1800">30 min</a>
-                <a className="btn" href="/#timer=3600" onClick={setTimer} data-time="3600">1 hour</a>
-                <a className="btn" href="/#timer=4800" onClick={setTimer} data-time="4800">1 h 20 min</a>
-                <a className="btn" href="/#timer=5400" onClick={setTimer} data-time="5400">1 h 30 min</a>
+            <div className="grid times" data-edit={edit}>
+                {renderTimes()}
                 <a className="btn" href="/" onClick={setTimer} data-time="">+</a>
             </div>
             <br/>
-            <div className="ms-default-trigger btn" onClick={setTimer} data-current="1">Select countdown time</div>
+            <div className="ms-default-trigger btn" onClick={setTimer} data-countdown="1">Start countdown timer</div>
             <br/>
             {!!countDown && (
                 <>

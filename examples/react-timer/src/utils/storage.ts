@@ -32,4 +32,4 @@ class Storage {
     }
 }
 
-export default new Storage();
+export const StorageManager =  new Storage();
