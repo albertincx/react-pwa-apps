@@ -1,4 +1,4 @@
-*, *::before, *::after {
+.modal-window *,.modal-window  *::before,.modal-window  *::after {
     box-sizing: border-box;
 }
 

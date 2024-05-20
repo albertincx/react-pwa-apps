@@ -34,7 +34,7 @@ const DefaultHeader = () => {
                 </div>
             </div>
             {showPopup ? (
-                <div id="open-modal" className="modal-window">
+                <div className="modal-window">
                     <div>
                         <a
                             href=""
@@ -47,6 +47,7 @@ const DefaultHeader = () => {
                         <h1>Greetings!</h1>
                         <div>
                             <div>This is an offline timer</div>
+                            <div>Web site <a href="https://timer.safiullin.io/">https://timer.safiullin.io/</a></div>
                             <div>Code is open
                                 <div>
                                     <a href="https://github.com/albertincx/react-pwa-apps">
@@ -65,6 +66,14 @@ const DefaultHeader = () => {
                             <p>
                                 <small>Update time: {`${d.toDateString()} ${d.toLocaleTimeString()}`}</small>
                             </p>
+                            {window.mobileCheck() && (
+                                <p className="red">
+                                    !Important: It is not working on mobile phones! Sorry
+                                    <br/>
+                                    Open me on PC
+                                    <a href="https://timer.safiullin.io/">https://timer.safiullin.io/</a>
+                                </p>
+                            )}
                             <p>
                                 {!!location.hostname.match('localhost') && (
                                     <button type="button" onClick={handleCrzy}>

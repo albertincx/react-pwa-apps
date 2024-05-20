@@ -260,9 +260,9 @@ importers:
       '@vitejs/plugin-legacy':
         specifier: ^5.4.0
         version: 5.4.0(terser@5.31.0)(vite@5.2.11)
-      mobile-select:
-        specifier: ^1.3.3
-        version: 1.3.3
+      grudus-timepicker:
+        specifier: ^1.0.2
+        version: 1.0.2
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -281,7 +281,7 @@ importers:
     devDependencies:
       '@rollup/plugin-replace':
         specifier: ^5.0.5
-        version: 5.0.5(rollup@4.17.2)
+        version: 5.0.5
       '@types/react':
         specifier: ^18.2.37
         version: 18.3.2
@@ -308,7 +308,7 @@ importers:
         version: 5.4.5
       vite:
         specifier: ^5.0.10
-        version: 5.2.11(@types/node@18.19.33)(terser@5.31.0)
+        version: 5.2.11(terser@5.31.0)
       vite-plugin-pwa:
         specifier: workspace:*
         version: link:../..
@@ -2919,6 +2919,19 @@ packages:
       rollup: 2.79.1
     dev: false
 
+  /@rollup/plugin-replace@5.0.5:
+    resolution: {integrity: sha512-rYO4fOi8lMaTg/z5Jb+hKnrHHVn8j2lwkqwyS4kTRhKyWOLf2wST2sWXr4WzWiTcoHTp2sTjqUbqIj2E39slKQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.1.0
+      magic-string: 0.30.10
+    dev: true
+
   /@rollup/plugin-replace@5.0.5(rollup@4.17.2):
     resolution: {integrity: sha512-rYO4fOi8lMaTg/z5Jb+hKnrHHVn8j2lwkqwyS4kTRhKyWOLf2wST2sWXr4WzWiTcoHTp2sTjqUbqIj2E39slKQ==}
     engines: {node: '>=14.0.0'}
@@ -2959,6 +2972,20 @@ packages:
       picomatch: 2.3.1
       rollup: 2.79.1
     dev: false
+
+  /@rollup/pluginutils@5.1.0:
+    resolution: {integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.5
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
 
   /@rollup/pluginutils@5.1.0(rollup@2.79.1):
     resolution: {integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g==}
@@ -3263,6 +3290,7 @@ packages:
     resolution: {integrity: sha512-NR9+KrpSajr2qBVp/Yt5TU/rp+b5Mayi3+OlMlcg2cVCfRmcG5PWZ7S4+MG9PZ5gWBoc9Pd0BKSRViuBCRPu0A==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -3784,7 +3812,7 @@ packages:
       regenerator-runtime: 0.14.1
       systemjs: 6.15.1
       terser: 5.31.0
-      vite: 5.2.11(@types/node@18.19.33)(terser@5.31.0)
+      vite: 5.2.11(terser@5.31.0)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -3800,7 +3828,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.24.1(@babel/core@7.24.5)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 5.2.11(@types/node@18.19.33)(terser@5.31.0)
+      vite: 5.2.11(terser@5.31.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6271,6 +6299,10 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /grudus-timepicker@1.0.2:
+    resolution: {integrity: sha512-c9Cl917OacL+ZhNlXrJIhgtSJmpstMYiT+AoSmYDKakbr0YsHHvWbIpYygmLj8OsL258OVB3fJt+YPEFQwfF1w==}
+    dev: false
+
   /gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
     engines: {node: '>=10'}
@@ -7086,10 +7118,6 @@ packages:
       pkg-types: 1.1.1
       ufo: 1.5.3
     dev: true
-
-  /mobile-select@1.3.3:
-    resolution: {integrity: sha512-DnDRwJZma/DAJ8reLHHHjLe0fI9BFIoX+Vlr0CwqfuLX7jcI1CY8LNz6s9a9KGojBm+hxbO/zJKXOR+iu1W2pw==}
-    dev: false
 
   /mobile-select@1.4.0:
     resolution: {integrity: sha512-6Gq3+RDCrDbBr4+y48JfrRpLtoS8Bj7EcGv/YEXPq6d09wZ8lKaQzXRF/P8hpFUXA/uFMmATemZbqZFI6WeFQg==}
@@ -8902,6 +8930,7 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: true
 
   /undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
@@ -9154,6 +9183,42 @@ packages:
         optional: true
     dependencies:
       '@types/node': 18.19.33
+      esbuild: 0.20.2
+      postcss: 8.4.38
+      rollup: 4.17.2
+      terser: 5.31.0
+    optionalDependencies:
+      fsevents: 2.3.3
+    dev: true
+
+  /vite@5.2.11(terser@5.31.0):
+    resolution: {integrity: sha512-HndV31LWW05i1BLPMUCE1B9E9GFbOu1MbenhS58FuK6owSO5qHm7GiCotrNY1YE5rMeQSFBGmT5ZaLEjFizgiQ==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+    dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
