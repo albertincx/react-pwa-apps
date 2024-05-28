@@ -6,7 +6,9 @@ import 'grudus-timepicker/dist/index.css'
 import {TIMER_TITLE} from '../consts';
 import {getRandomMs} from '../utils';
 
-import {StorageManager} from "../../../utils/storage.ts";
+import {StorageManager} from '../../../utils/storage.ts';
+
+import {ITimer} from '../types.ts';
 
 let countD: number = 0;
 
@@ -32,10 +34,6 @@ const timerOpts = {
     handColor: "#F44336",
 }
 
-interface ITimer {
-    time?: number;
-    name: string;
-}
 
 const initTimers: ITimer[] = [
     {name: '3 sec', time: 3},
@@ -79,7 +77,7 @@ const TimerApp: React.FC<IProps> = ({edit}) => {
         if (cb instanceof Function) cb();
     }
 
-    const reBuildTimers = (addOrDeleteIndex: string | { name: '' } = '', cb?: () => void) => {
+    const reBuildTimers = (addOrDeleteIndex: string | ITimer = '', cb?: () => void | undefined) => {
         let newTimers = [...timers];
         if (typeof addOrDeleteIndex !== 'string') {
             if (~newTimers.findIndex((t) => t.name === addOrDeleteIndex.name)) {
@@ -117,7 +115,7 @@ const TimerApp: React.FC<IProps> = ({edit}) => {
             Timepicker.showPicker({
                 time: countdown ? new Date() : {hours: 0, minutes: 5},
                 ...timerOpts,
-                onSubmit: ({hours, minutes}) => {
+                onSubmit: ({hours, minutes}: { hours: number, minutes: number }) => {
                     let diffSeconds = 0;
                     if (!countdown) {
                         if (hours) {
@@ -135,11 +133,14 @@ const TimerApp: React.FC<IProps> = ({edit}) => {
                         diffSeconds = tm / 1000;
                     }
                     if (diffSeconds) {
-                        const newTime = {
+                        const newTime: ITimer = {
                             time: diffSeconds,
                             name: `${hours ? `${hours} h ` : ''}${minutes} min`,
                         }
-                        reBuildTimers(newTime, countdown && (() => {
+                        reBuildTimers(newTime, (() => {
+                            if (!countdown) {
+                                return;
+                            }
                             reset(() => {
                                 setCountDown(diffSeconds);
                                 window.safTimerBtn(+diffSeconds);
@@ -158,12 +159,23 @@ const TimerApp: React.FC<IProps> = ({edit}) => {
         reset();
     }
 
+    const handleExtra = (e: React.SyntheticEvent<EventTarget>) => {
+        const cur = countDown;
+        reset(() => {
+            const add = countDown < 60 ? 10 : 600;
+            const tm = (cur - reminderData.secPassed) + (e.target.dataset.dir === '+' ? add : (add * -1));
+            window.history.replaceState(null, '', '#timer=' + tm);
+            setCountDown(+tm + getRandomMs());
+            window.safTimerBtn(+tm);
+        })
+    }
+
     const renderTimes = () => {
         return timers.map(({time, name}) => (
             <a key={`${time}${name}`} className="btn" href={`/#timer=${time}`} onClick={setTimer} data-time={time}>
                 {name}
                 <div className="edit" data-todelete={edit && time}>{edit ? (
-                    <div className="icon-delete" data-todelete={time} />
+                    <div className="icon-delete" data-todelete={time}/>
                 ) : ''}</div>
             </a>
         ))
@@ -191,7 +203,13 @@ const TimerApp: React.FC<IProps> = ({edit}) => {
                         </div>
                     </div>
                     <br/>
-                    <button className="stop-timer btn" onClick={handleReset}>Stop timer!</button>
+                    <div className="stop-wrapper">
+                        <button className="stop-timer1 btn" onClick={handleExtra}
+                                data-dir="-">-10 {countDown < 60 ? 'sec' : 'min'}</button>
+                        <button className="stop-timer btn" onClick={handleReset}>Stop timer!</button>
+                        <button className="stop-timer1 btn" onClick={handleExtra}
+                                data-dir="+">+10 {countDown < 60 ? 'sec' : 'min'}</button>
+                    </div>
                 </>
             )}
         </>

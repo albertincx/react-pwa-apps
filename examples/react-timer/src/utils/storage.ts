@@ -27,7 +27,7 @@ class Storage {
         return false;
     }
 
-    setJ(k: string, v: { voice: string; volume: number; rate: number; pitch: number }) {
+    setJ(k: string, v) {
         return this.set(k, JSON.stringify(v));
     }
 }

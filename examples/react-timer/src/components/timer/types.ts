@@ -1,3 +1,7 @@
+export interface ITimer {
+    time?: number;
+    name: string;
+}
 export type ISettings = {
     pitch?: number;
 }

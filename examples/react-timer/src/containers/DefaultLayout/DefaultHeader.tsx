@@ -70,7 +70,7 @@ const DefaultHeader = () => {
                                 <p className="red">
                                     !Important: It is not working on mobile phones! Sorry
                                     <br/>
-                                    Open me on PC
+                                    Open me on PC <br/>
                                     <a href="https://timer.safiullin.io/">https://timer.safiullin.io/</a>
                                 </p>
                             )}

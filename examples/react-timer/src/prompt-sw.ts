@@ -23,7 +23,6 @@ registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html')))
 
 // Click and open notification
 self.addEventListener('notificationclick', event => {
-  console.log('Data 1', event)
   event.notification.close();
   event.waitUntil(
       clients
@@ -32,7 +31,7 @@ self.addEventListener('notificationclick', event => {
             includeUncontrolled: true,
           })
           .then((clientList) => {
-            console.log('Data', clientList);
+            // console.log('Data', clientList);
             for (const client of clientList) {
               // if (client.url === "/" && "focus" in client) return client.focus();
               if ("focus" in client) return client.focus();
